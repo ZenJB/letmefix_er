@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>LetMeFix</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <!-- Manifestos-->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <!-- iOS -->
+  <!-- jQuery -->
+  <script src="/js/jquery.js"></script>
+  <!-- Design Site-->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- Definições do ecra do PWA-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!-- PWA no iOS-->
+  <link rel="apple-touch-icon" href="/images/icon-152.png"><meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="LetMeFix">
+  <meta name="msapplication-TileImage" content="/images/icon-144.png">
+  <meta name="msapplication-TileColor" content="#FFFFFF">
+  <!-- Tema do Browser-->
+  <meta name="theme-color" content="#317EFB"/>
+
+</head>
+<body class="fullscreen">
+  <div class="container" id="container">
+    <img class="title_logo" src="/images/icon-152.png" alt="Logo">
+    <br>
+    <p class="login_btn">Sem Internet.</p>
+  </div>
+
+
+  <!-- Worker, Funções JavaScript-->
+  <script>
+    /** Detetar se o dispositivo não possui uma coneção à internet e informar*/
+    window.addEventListener("load", () => {
+      function handleNetworkChange(event) {
+        const fadeSpeed = 100;
+        if (navigator.onLine) {
+          $("#container").fadeOut(fadeSpeed, ()=>{
+            if(history.length == 0) {
+              window.location.replace("/");
+            }else{
+              history.go(-1);
+            }
+          });
+        }
+      }
+
+      window.addEventListener("online", handleNetworkChange);
+      window.addEventListener("offline", handleNetworkChange);
+    });
+  </script>
+</body>
+</html>

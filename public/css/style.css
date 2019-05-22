@@ -1,0 +1,49 @@
+body {
+  font-family: sans-serif;
+  color: white;
+  background-color: black;
+}
+
+/* Make content area fill the entire browser window */
+html,
+.fullscreen {
+  display: flex;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+/* Center the content in the browser window */
+.container {
+  margin: auto;
+  text-align: center;
+}
+
+.title_logo {
+  width: calc(1vw+1vh);
+  height: calc(1vw+1vh);
+}
+.input_login{
+  color: white;
+
+  border-radius: 3px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom-color: aliceblue;
+  border-bottom-width: calc(0.2vw+0.2vh);
+  
+  background-color: black;
+  width: calc(1vh+1vw);
+  height: calc(1vh+1vw);
+  font-size: calc(2vw+2vh);
+  text-align: center;
+}
+.input_login:focus, input:focus{
+  outline: none;
+}
+
+.login_btn{
+  cursor: pointer;
+}
