@@ -29,10 +29,30 @@
   <div class="container" id="container">
       <img class="title_logo" src="/images/icon-152.png" alt="Logo">
         <p class="login_btn">Bem Vindo</p>
+        <a class="login_btn" id="logout">Terminar a sessão</a>
   </div>
 
 
   <!-- Worker, Funções JavaScript-->
   <script src="/js/main.js"></script>
+  <script>
+      $("#logout").click(function(){
+        $.ajax({
+          type: 'POST',
+          url: '/logout',
+          success: (response) => {
+            if(response === "ok"){
+              window.location.href = "/";
+            }else{
+              alert('Um erro desconhecido aconteceu!');
+            }
+          },
+          error: (jqXHR, textStatus, errorThrown) => {
+             console.log(textStatus, errorThrown);
+             alert('Um erro desconhecido aconteceu!');
+          }
+      });
+      });
+    </script>
 </body>
 </html>

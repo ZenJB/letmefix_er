@@ -31,12 +31,12 @@ window.addEventListener("load", () => {
   window.addEventListener("offline", handleNetworkChange);
 });
 
-/** Forçar o protocolo HTTPS */
+/** Forçar o protocolo HTTPS 
 if (location.protocol != 'https:')
 {
  location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
 }
-
+*/
 $.ajax({
   url:'/testar_ligacao.html',
   type:'GET',

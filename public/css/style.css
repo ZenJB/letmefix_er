@@ -18,6 +18,7 @@ html,
 .container {
   margin: auto;
   text-align: center;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .title_logo {
@@ -40,10 +41,16 @@ html,
   font-size: calc(2vw+2vh);
   text-align: center;
 }
-.input_login:focus, input:focus{
+.input_login:focus, input_login:focus{
   outline: none;
 }
 
 .login_btn{
   cursor: pointer;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 1);
+}
+/* Ao clicar */
+.login_btn:active{
+  color: rgba(255, 255, 255, 0.5);
 }

@@ -29,21 +29,62 @@
   <div class="container" id="container">
       <img class="title_logo" src="/images/icon-152.png" alt="Logo">
       <br>
-      <input class="input_login" type="text" id="nome" placeholder="Nome Completo">
+      <input class="input_login" type="text" id="nome_completo" placeholder="Nome Completo">
       <br>
       <br>
-        <input class="input_login" type="text" id="email" placeholder="Email">
-        <br>
-        <br>
-        <input class="input_login" type="password" id="password" placeholder="Palavra - Passe">
-        <br>
-        <p class="login_btn"><a href="/main.html">Registar</a></p>
-        <br>
-        <p class="login_btn">Possui conta? Clique <a href="/">aqui</a>.</p>
+      <input class="input_login" type="text" id="email" placeholder="Email">
+      <br>
+      <br>
+      <select id="tipoDeUtilizador">
+          <option value="Cliente Particular" selected="selected">Cliente Particular</option>
+          <option value="Cliente Comercial">Cliente Comercial</option>
+          <option value="Profissional">Profissional</option>
+        </select>
+      <br>
+      <br>
+      <input class="input_login" type="password" id="password" placeholder="Palavra - Passe">
+      <br>
+      <p class="login_btn"><a class="login_btn" id="register_btn">Registar</a></p>
+      <br>
+      <p class="login_btn">Possui conta? Clique <a href="/">aqui</a>.</p>
   </div>
 
 
-  <!-- Worker, Funções JavaScript-->
+  <!-- Worker, Funções JavaScript -->
   <script src="/js/main.js"></script>
+  <script>
+    function registar(){
+      $.ajax({
+        type: 'POST',
+        url: '/registo',
+        data: { 
+            'nome_completo': document.getElementById('nome_completo').value,
+            'email': document.getElementById('email').value, 
+            'tipoDeUtilizador': document.getElementById('tipoDeUtilizador').value, 
+            'password': document.getElementById('password').value
+        },
+        success: (response) => {
+          if(response === "ok"){
+            window.location.href = "/main.html";
+          }else{
+            alert('Email ou palavra passe errado(s)');
+          }
+        },
+        error: (jqXHR, textStatus, errorThrown) => {
+           console.log(textStatus, errorThrown);
+           alert('Um erro desconhecido aconteceu.');
+        }
+    });
+    }
+    $(document).keypress(function(event){
+      var keycode = (event.keyCode ? event.keyCode : event.which);
+      if(keycode == '13'){
+          registar();  
+      }
+    });  
+    $("#register_btn").click(function(){
+      registar();
+    });
+  </script>
 </body>
 </html>

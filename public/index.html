@@ -29,18 +29,50 @@
   <div class="container" id="container">
       <img class="title_logo" src="/images/icon-152.png" alt="Logo">
       <br>
-        <input class="input_login" type="text" id="email" placeholder="Email">
+        <input class="input_login" type="text" id="email" name="email" placeholder="Email">
         <br>
         <br>
-        <input class="input_login" type="password" id="password" placeholder="Palavra - Passe">
+        <input class="input_login" type="password" id="password" name="password" placeholder="Palavra - Passe">
         <br>
-        <p class="login_btn"><a href="/main.html">Entrar</a></p>
+        <p><a class="login_btn" id="login_btn">Entrar</a></p>
         <br>
-        <p class="login_btn">Não possui conta? Clique <a href="/registar.html">aqui</a>.</p>
+        <p>Não possui conta? Clique <a class="login_btn" href="/registar.html">aqui</a>.</p>
   </div>
 
 
   <!-- Worker, Funções JavaScript-->
   <script src="/js/main.js"></script>
+  <script>
+    function login(){
+      $.ajax({
+        type: 'POST',
+        url: '/login',
+        data: { 
+            'email': document.getElementById('email').value, 
+            'password': document.getElementById('password').value
+        },
+        success: (response) => {
+          if(response === "ok"){
+            window.location.href = "/main.html";
+          }else{
+            alert('Email ou palavra passe errado(s)');
+          }
+        },
+        error: (jqXHR, textStatus, errorThrown) => {
+           console.log(textStatus, errorThrown);
+           alert('Um erro desconhecido aconteceu.');
+        }
+    });
+    }
+    $(document).keypress(function(event){
+      var keycode = (event.keyCode ? event.keyCode : event.which);
+      if(keycode == '13'){
+          login();  
+      }
+    });  
+    $("#login_btn").click(function(){
+      login();
+    });
+  </script>
 </body>
 </html>
