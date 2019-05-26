@@ -1,0 +1,225 @@
+body {
+    font-family: sans-serif;
+    font-size: calc(1.3vh + 1.3vw);
+    color: white;
+    background-color: black;
+  }
+  
+  /* Make content area fill the entire browser window */
+  html,
+  .fullscreen {
+    display: flex;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  
+  .bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: rgb(255, 255, 255);
+    margin: 6px 0;
+    transition: 0.4s;
+  }
+  
+    .change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px);
+    }
+    .change .bar2 {
+        opacity: 0;
+    }
+    .change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+    transform: rotate(45deg) translate(-8px, -8px);
+    }
+
+.navBar{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 92%;
+    padding-left: 10px;
+    background-color: rgb(136, 136, 136);
+    display: table-cell;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+.navBar .item{
+  display: inline-block;
+  vertical-align: middle;
+  padding-right: calc(1vh + 1vw);
+  cursor: pointer;
+}
+
+.menu{
+  position: absolute;
+  left: 0px;
+  right: 70%;
+  top: 8%;
+  bottom: 0px;
+  background-color: rgb(185, 185, 185);
+  z-index: 1;
+  display: none;
+  text-align: center;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+     -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+          user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome and Opera */
+}
+.menu .titulo{
+text-align: center;
+font-size: calc(2vh + 2vw);
+color: rgb(104, 104, 104);
+cursor: context-menu;
+}
+.menu .item{
+text-align: left;
+margin-left: 5px;
+font-size: calc(1vh + 1vw);
+color: rgb(145, 145, 145);
+cursor: pointer;
+}
+.menu .item:hover{
+color: rgb(109, 109, 109);
+}
+
+.container{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 8%;
+    bottom: 0px;
+    text-align: center;
+    overflow-y: scroll;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+.container .titulo{
+  font-size: calc(1.5vh + 1.5vw);
+}
+.container .subtitulo{
+  font-size: calc(1vh + 1vw);
+}
+.input_login{
+  color: rgb(0, 0, 0);
+
+  border-radius: 3px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  
+  width: calc(1vh+1vw);
+  height: calc(1vh+1vw);
+  font-size: calc(2vw+2vh);
+  text-align: center;
+}
+.input_login:focus, input_login:focus{
+  outline: none;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.number-input {
+  border: 2px solid #ddd;
+  display: inline-flex;
+}
+
+.number-input,
+.number-input * {
+  box-sizing: border-box;
+}
+
+.number-input button {
+  outline:none;
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  width: calc(2vh + 2vw);
+  height: calc(2vh + 2vw);
+  cursor: pointer;
+  margin: 0;
+  position: relative;
+}
+
+.number-input button:before,
+.number-input button:after {
+  display: inline-block;
+  position: absolute;
+  content: '';
+  width: calc(1vh + 1vw);
+  height: 2px;
+  background-color: #5c5c5c;
+  transform: translate(-50%, -50%);
+}
+.number-input button.plus:after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.number-input input[type=number] {
+  font-family: sans-serif;
+  max-width: calc(2vh + 2vw);
+  border: solid #ddd;
+  border-width: 0 2px;
+  font-size: calc(1vh + 1vw);
+  height: calc(2vh + 2vw);
+  font-weight: bold;
+  text-align: center;
+}
+.areas_trabalhos{
+  text-align: left;
+}
+
+.btn_submit{
+  cursor: pointer;
+  font-size: calc(1.5vh + 1.5vw);
+}
+
+.tabela {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.tabela td, .tabela th {
+  border: 1px solid rgb(56, 56, 56);
+  padding: 8px;
+}
+
+.tabela tr{background-color: #141414;}
+
+.tabela tr:hover {background-color: rgb(27, 27, 27);}
+
+.tabela th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgb(65, 65, 65);
+  color: white;
+}
+.tabela .indice{
+  cursor: pointer;
+}
+.tabela .indice:hover{
+  background-color: rgb(63, 63, 63);
+}

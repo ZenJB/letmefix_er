@@ -46,7 +46,30 @@
   </div>
   <!-- Corpo do programa -->
   <div class="container" id="container">
-      <p><%= numero_servicos %></p>
+        
+        <p class="titulo">Lista das Obras</p>
+        <table class="tabela">
+          <tr>
+            <th>ID da Obra</th>
+            <th>Data Limite</th>
+            <th>Descrição</th>
+          </tr>
+          <tr>
+            <td class="indice">1</td>
+            <td>28/10/2019</td>
+            <td>Arranjar cano da pia</td>
+          </tr>
+          <tr>
+            <td class="indice">2</td>
+            <td>10/10/2019</td>
+            <td>Arranjar tomadas eletricas</td>
+          </tr>
+          <tr>
+            <td class="indice">3</td>
+            <td>04/03/2021</td>
+            <td>Construção de uma casa</td>
+          </tr>
+        </table>
   </div>
 
 
@@ -93,6 +116,32 @@
     $("#login_btn").click(function(){
       login();
     });    
+  
+    function criar_obra(){
+      $.ajax({
+        type: 'POST',
+        url: '/criar_obra',
+        data: { 
+            'descricao': document.getElementById('descricao').value, 
+            'carpintaria': document.getElementById('carpintaria').value,
+            'canalizador': document.getElementById('canalizador').value,
+            'eletricista': document.getElementById('eletricista').value,
+            'construcao_civil': document.getElementById('construcao_civil').value
+        },
+        success: (response) => {
+          if(response === "ok"){
+            alert('Proposta de edição enviada!');
+            window.location.href = "/main.html";
+          }else{
+            alert('Impossivel enviar a proposta!');
+          }
+        },
+        error: (jqXHR, textStatus, errorThrown) => {
+           console.log(textStatus, errorThrown);
+           alert('Um erro desconhecido aconteceu.');
+        }
+    });
+    }
   </script>
 </body>
 </html>

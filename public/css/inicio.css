@@ -4,7 +4,6 @@ body {
   background-color: black;
 }
 
-/* Make content area fill the entire browser window */
 html,
 .fullscreen {
   display: flex;
@@ -14,7 +13,6 @@ html,
   width: 100%;
 }
 
-/* Center the content in the browser window */
 .container {
   margin: auto;
   text-align: center;

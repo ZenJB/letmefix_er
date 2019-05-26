@@ -11,7 +11,7 @@
   <!-- jQuery -->
   <script src="/js/jquery.js"></script>
   <!-- Design Site-->
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/inicio.css">
 
   <!-- Definições do ecra do PWA-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -35,11 +35,23 @@
       <input class="input_login" type="text" id="email" placeholder="Email">
       <br>
       <br>
-      <select id="tipoDeUtilizador">
+      <select class="input_login" id="tipoDeUtilizador" onchange="ativarCampoCompetencias(this);">
           <option value="Cliente Particular" selected="selected">Cliente Particular</option>
           <option value="Cliente Comercial">Cliente Comercial</option>
           <option value="Profissional">Profissional</option>
         </select>
+      <br>
+      <br>
+      <input class="input_login" type="text" id="competencias" placeholder="Competencias" style="display: none;">
+      <br>
+      <br>
+      <input class="input_login" type="text" id="morada" placeholder="Morada">
+      <br>
+      <br>
+      <input class="input_login" type="text" id="nif" placeholder="NIF">
+      <br>
+      <br>
+      <input class="input_login" type="text" id="telefone" placeholder="telefone">
       <br>
       <br>
       <input class="input_login" type="password" id="password" placeholder="Palavra - Passe">
@@ -53,27 +65,53 @@
   <!-- Worker, Funções JavaScript -->
   <script src="/js/main.js"></script>
   <script>
+    function ativarCampoCompetencias(that){
+      if (that.value == "Profissional") {
+        document.getElementById("competencias").style.display = "block";
+      } else {
+        document.getElementById("competencias").style.display = "none";
+      }
+    }
+
     function registar(){
-      $.ajax({
-        type: 'POST',
-        url: '/registo',
-        data: { 
-            'nome_completo': document.getElementById('nome_completo').value,
-            'email': document.getElementById('email').value, 
-            'tipoDeUtilizador': document.getElementById('tipoDeUtilizador').value, 
-            'password': document.getElementById('password').value
-        },
-        success: (response) => {
-          if(response === "ok"){
-            window.location.href = "/main.html";
-          }else{
-            alert('Email ou palavra passe errado(s)');
+      const nome_completo = document.getElementById('nome_completo').value;
+      const email = document.getElementById('email').value;
+      const tipoDeUtilizador = document.getElementById('tipoDeUtilizador').value;
+      const password = document.getElementById('password').value;
+      const morada = document.getElementById('morada').value;
+      const nif = document.getElementById('nif').value;
+      const telefone = document.getElementById('telefone').value;
+      const competencias = document.getElementById('competencias').value;
+
+      if(tipoDeUtilizador == "Profissional" && competencias == "")
+        alert('Alguns campos estão em branco. Por favor os preencha.');
+      else
+      if(nome_completo == "" || email == "" || tipoDeUtilizador == "" || password == "" || morada == "" || nif == "" || telefone == "")
+        alert('Alguns campos estão em branco. Por favor os preencha.');
+      else
+        $.ajax({
+          type: 'POST',
+          url: '/registo',
+          data: { 
+              'nome_completo': nome_completo,
+              'email' : email,
+              'tipoDeUtilizador': tipoDeUtilizador,
+              'password' : password,
+              'morada' : morada,
+              'nif' : nif,
+              'telefone' : telefone
+          },
+          success: (response) => {
+            if(response === "ok"){
+              window.location.href = "/main.html";
+            }else{
+              alert('Esse email já existe. por favor tente novamente com outro email.');
+            }
+          },
+          error: (jqXHR, textStatus, errorThrown) => {
+            console.log(textStatus, errorThrown);
+            alert('Um erro desconhecido aconteceu.');
           }
-        },
-        error: (jqXHR, textStatus, errorThrown) => {
-           console.log(textStatus, errorThrown);
-           alert('Um erro desconhecido aconteceu.');
-        }
     });
     }
     $(document).keypress(function(event){

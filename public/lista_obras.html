@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>LetMeFix</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <!-- Manifestos-->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <!-- iOS -->
+  <!-- jQuery -->
+  <script src="/js/jquery.js"></script>
+  <!-- Design Site-->
+  <link rel="stylesheet" href="/css/design.css">
+
+  <!-- Definições do ecra do PWA-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!-- PWA no iOS-->
+  <link rel="apple-touch-icon" href="/images/icon-152.png"><meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="LetMeFix">
+  <meta name="msapplication-TileImage" content="/images/icon-144.png">
+  <meta name="msapplication-TileColor" content="#FFFFFF">
+  <!-- Tema do Browser-->
+  <meta name="theme-color" content="#317EFB"/>
+
+</head>
+<body class="fullscreen">
+  <!-- Barra Superior -->
+  <div class="navBar">
+    <div class="item" onclick="myFunction(this)">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </div>
+  </div>
+  <!-- Menu Lateral -->
+  <div class="menu" id="menu">
+    <p class="titulo">Obras</p>
+    <p class="item" onclick="mudarPagina('criar_obra');">Criar</p>
+    <p class="item" onclick="mudarPagina('editar_obra');">Ver todas as Obras</p>
+    <p class="titulo">Conta</p>
+    <p class="item" onclick="logout();">Terminar Sessão</p>
+  </div>
+  <!-- Corpo do programa -->
+  <div class="container" id="container">
+        
+        <p class="titulo">Obra no. 15565</p>
+        <p class="subtitulo">Descrição</p>
+        <textarea rows="4" cols="50" class="input_login" id="descricao" placeholder="Descricao">Reparar canos da casa de banho</textarea>
+        <br>
+        <br>
+        <p class="subtitulo">Profissionais a contratar</p>
+        <div class="areas_trabalhos">
+            <p>
+                <div class="number-input">
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+                    <input class="quantity" min="0" id="carpintaria" name="quantity" value="0" type="number">
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                </div>
+                Carpintaria
+            </p>
+            <p>
+                <div class="number-input">
+                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+                        <input class="quantity" min="0" id="canalizador" name="quantity" value="2" type="number">
+                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                </div>
+                Canalizador
+            </p>
+            <p>
+                <div class="number-input">
+                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+                        <input class="quantity" min="0" id="eletricista" name="quantity" value="0" type="number">
+                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                </div>
+                Eletricista
+            </p>
+            <p>
+                <div class="number-input">
+                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+                        <input class="quantity" min="0" id="construcao_civil" name="quantity" value="0" type="number">
+                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                </div>
+                Construção Civil
+            </p>
+        </div>
+        <p class="btn_submit" onclick="criar_obra();">Propor edição da Obra</p>
+  </div>
+
+
+  <!-- Worker, Funções JavaScript-->
+  <script src="/js/main.js"></script>
+  <script>
+    function mudarPagina(pagina){
+      window.location.href = "/"+pagina+".html";
+
+    }
+    var menuAtivo = false;
+
+      function myFunction(x) {
+        x.classList.toggle("change");
+        if(menuAtivo){
+          $("#menu").hide("fast");
+          menuAtivo = !menuAtivo;
+        }else{
+          $("#menu").show("fast");
+          menuAtivo = !menuAtivo;
+        }
+      }
+      function logout(){
+      $.ajax({
+        type: 'POST',
+        url: '/logout',
+        success: (response) => {
+          if(response === "ok"){
+            window.location.href = "/";
+          }
+        },
+        error: (jqXHR, textStatus, errorThrown) => {
+           console.log(textStatus, errorThrown);
+           alert('Um erro desconhecido aconteceu.');
+        }
+    });
+    }
+    $(document).keypress(function(event){
+      var keycode = (event.keyCode ? event.keyCode : event.which);
+      if(keycode == '13'){
+          login();  
+      }
+    });  
+    $("#login_btn").click(function(){
+      login();
+    });    
+  
+    function criar_obra(){
+      $.ajax({
+        type: 'POST',
+        url: '/criar_obra',
+        data: { 
+            'descricao': document.getElementById('descricao').value, 
+            'carpintaria': document.getElementById('carpintaria').value,
+            'canalizador': document.getElementById('canalizador').value,
+            'eletricista': document.getElementById('eletricista').value,
+            'construcao_civil': document.getElementById('construcao_civil').value
+        },
+        success: (response) => {
+          if(response === "ok"){
+            alert('Proposta de edição enviada!');
+            window.location.href = "/main.html";
+          }else{
+            alert('Impossivel enviar a proposta!');
+          }
+        },
+        error: (jqXHR, textStatus, errorThrown) => {
+           console.log(textStatus, errorThrown);
+           alert('Um erro desconhecido aconteceu.');
+        }
+    });
+    }
+  </script>
+</body>
+</html>
