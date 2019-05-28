@@ -39,10 +39,17 @@
           <option value="Cliente Particular" selected="selected">Cliente Particular</option>
           <option value="Cliente Comercial">Cliente Comercial</option>
           <option value="Profissional">Profissional</option>
-        </select>
+      </select>
       <br>
       <br>
-      <input class="input_login" type="text" id="competencias" placeholder="Competencias" style="display: none;">
+      <input class="input_login" type="text" id="ramo_do_cliente_comercial" placeholder="Ramo de Operação" style="display: none;">
+      <select class="input_login" id="competencias" style="display: none;">
+        <option value="" selected="selected"></option>
+        <option value="Carpintaria">Carpintaria</option>
+        <option value="Canalizador">Canalizador</option>
+        <option value="Eletricista">Eletricista</option>
+        <option value="Construção Civil">Construção Civil</option>
+      </select>
       <br>
       <br>
       <input class="input_login" type="text" id="morada" placeholder="Morada">
@@ -57,6 +64,7 @@
       <input class="input_login" type="password" id="password" placeholder="Palavra - Passe">
       <br>
       <p class="login_btn"><a class="login_btn" id="register_btn">Registar</a></p>
+      <br><a class="login_btn" href="/auth/facebook">Registar usando o Facebook</a>
       <br>
       <p class="login_btn">Possui conta? Clique <a href="/">aqui</a>.</p>
   </div>
@@ -65,11 +73,18 @@
   <!-- Worker, Funções JavaScript -->
   <script src="/js/main.js"></script>
   <script>
+
+
     function ativarCampoCompetencias(that){
       if (that.value == "Profissional") {
         document.getElementById("competencias").style.display = "block";
       } else {
         document.getElementById("competencias").style.display = "none";
+      }
+      if (that.value == "Cliente Comercial") {
+        document.getElementById("ramo_do_cliente_comercial").style.display = "block";
+      } else {
+        document.getElementById("ramo_do_cliente_comercial").style.display = "none";
       }
     }
 
@@ -82,10 +97,13 @@
       const nif = document.getElementById('nif').value;
       const telefone = document.getElementById('telefone').value;
       const competencias = document.getElementById('competencias').value;
-
+      const ramo_do_cliente_comercial = document.getElementById('ramo_do_cliente_comercial').value;
       if(tipoDeUtilizador == "Profissional" && competencias == "")
         alert('Alguns campos estão em branco. Por favor os preencha.');
       else
+      if(tipoDeUtilizador == "Cliente Comercial" && ramo_do_cliente_comercial == "")
+        alert('Alguns campos estão em branco. Por favor os preencha.');
+      else      
       if(nome_completo == "" || email == "" || tipoDeUtilizador == "" || password == "" || morada == "" || nif == "" || telefone == "")
         alert('Alguns campos estão em branco. Por favor os preencha.');
       else
@@ -99,7 +117,9 @@
               'password' : password,
               'morada' : morada,
               'nif' : nif,
-              'telefone' : telefone
+              'telefone' : telefone,
+              'competencias': competencias,
+              'ramo_do_cliente_comercial': ramo_do_cliente_comercial
           },
           success: (response) => {
             if(response === "ok"){

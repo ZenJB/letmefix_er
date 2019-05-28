@@ -223,3 +223,18 @@ input[type=number]::-webkit-outer-spin-button {
 .tabela .indice:hover{
   background-color: rgb(63, 63, 63);
 }
+.enviar_pedido_servico{
+  position: absolute;
+    left: 15%;
+    right: 15%;
+    top: 15%;
+    bottom: 15%;
+    text-align: center;
+    background-color: #777777;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.botao_clicavel{
+  cursor: pointer;
+}

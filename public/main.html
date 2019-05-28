@@ -34,12 +34,13 @@
       <div class="bar3"></div>
     </div>
   </div>
-  <!-- Menu Lateral -->
-  <div class="menu" id="menu">
+   <!-- Menu Lateral -->
+   <div class="menu" id="menu">
     <p class="titulo">Menu</p>
     <p class="item" onclick="mudarPagina('main');">Inicio</p>
     <p class="titulo">Obras</p>
-    <p class="item" onclick="mudarPagina('criar_obra');">Criar</p>
+    <p class="item" onclick="mudarPagina('criar_servico');">Pedir Servico Direto</p>
+    <p class="item" onclick="mudarPagina('criar_obra');">Pedir Obra</p>
     <p class="item" onclick="mudarPagina('listar_obras');">Ver todas as Obras</p>
     <p class="titulo">Conta</p>
     <p class="item" onclick="logout();">Terminar Sessão</p>
@@ -47,12 +48,47 @@
   <!-- Corpo do programa -->
   <div class="container" id="container">
       <p><%= numero_servicos %></p>
+      <p class="titulo">Pedidos por Aceitar</p>
+        <table class="tabela">
+          <tr>
+            <th>ID da Obra</th>
+            <th>Informação enviada pelo profissional</th>
+            <th>Profissional</th>
+            <th>Custo</th>
+            <th>Ação</th>
+          </tr>
+          <%= lista_servicos_por_aceitar %>
+        </table>
   </div>
 
 
   <!-- Worker, Funções JavaScript-->
   <script src="/js/main.js"></script>
   <script>
+    function pedidos(aceitar,id,profissional){
+      $.ajax({
+        type: 'POST',
+        url: '/aceitar_proposta_trabalho',
+        data: { 
+            'id': id,
+            'profissional': profissional,
+            'aceitar': aceitar
+        },
+        success: (response) => {
+          if(response === "ok"){
+            alert('Pedido processado com sucesso!');
+            window.location.href = "/main.html";
+          }else{
+            alert('Impossivel responder a pedido!');
+          }
+        },
+        error: (jqXHR, textStatus, errorThrown) => {
+           console.log(textStatus, errorThrown);
+           alert('Um erro desconhecido aconteceu.');
+        }
+      });
+    }
+
     function mudarPagina(pagina){
       window.location.href = "/"+pagina+".html";
 

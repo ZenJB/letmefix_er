@@ -34,12 +34,13 @@
       <div class="bar3"></div>
     </div>
   </div>
-  <!-- Menu Lateral -->
-  <div class="menu" id="menu">
+ <!-- Menu Lateral -->
+ <div class="menu" id="menu">
     <p class="titulo">Menu</p>
     <p class="item" onclick="mudarPagina('main');">Inicio</p>
     <p class="titulo">Obras</p>
-    <p class="item" onclick="mudarPagina('criar_obra');">Criar</p>
+    <p class="item" onclick="mudarPagina('criar_servico');">Pedir Servico Direto</p>
+    <p class="item" onclick="mudarPagina('criar_obra');">Pedir Obra</p>
     <p class="item" onclick="mudarPagina('listar_obras');">Ver todas as Obras</p>
     <p class="titulo">Conta</p>
     <p class="item" onclick="logout();">Terminar Sessão</p>
@@ -59,35 +60,39 @@
             <p>
                 <div class="number-input">
                     <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
-                    <input class="quantity" min="0" id="carpintaria" name="quantity" value="0" type="number">
+                    <input class="quantity" min="0" max="1" id="carpintaria" name="quantity" value="0" type="number">
                     <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
                 </div>
                 Carpintaria
             </p>
+            <textarea rows="4" cols="50" class="input_login" id="descricao_carpintaria" placeholder="Descrição da Carpintaria"></textarea>
             <p>
                 <div class="number-input">
                         <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
-                        <input class="quantity" min="0" id="canalizador" name="quantity" value="0" type="number">
+                        <input class="quantity" min="0" max="1" id="canalizador" name="quantity" value="0" type="number">
                         <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
                 </div>
                 Canalizador
             </p>
+            <textarea rows="4" cols="50" class="input_login" id="descricao_canalizador" placeholder="Descrição do Canalizador"></textarea>
             <p>
                 <div class="number-input">
                         <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
-                        <input class="quantity" min="0" id="eletricista" name="quantity" value="0" type="number">
+                        <input class="quantity" min="0" max="1" id="eletricista" name="quantity" value="0" type="number">
                         <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
                 </div>
                 Eletricista
             </p>
+            <textarea rows="4" cols="50" class="input_login" id="descricao_eletricista" placeholder="Descrição do Eletricista"></textarea>
             <p>
                 <div class="number-input">
                         <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
-                        <input class="quantity" min="0" id="construcao_civil" name="quantity" value="0" type="number">
+                        <input class="quantity" min="0" max="1" id="construcao_civil" name="quantity" value="0" type="number">
                         <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
                 </div>
                 Construção Civil
             </p>
+            <textarea rows="4" cols="50" class="input_login" id="descricao_construcao_civil" placeholder="Descrição da Construção Civil"></textarea>
         </div>
         <p class="btn_submit" onclick="criar_obra();">Criar Nova Obra</p>
   </div>
@@ -144,6 +149,10 @@
         data: { 
             'data_limite': document.getElementById('data_limite').value,
             'descricao': document.getElementById('descricao').value, 
+            'descricao_carpintaria': document.getElementById('descricao_carpintaria').value,
+            'descricao_canalizador': document.getElementById('descricao_canalizador').value,
+            'descricao_eletricista': document.getElementById('descricao_eletricista').value,
+            'descricao_construcao_civil': document.getElementById('descricao_construcao_civil').value,
             'carpintaria': document.getElementById('carpintaria').value,
             'canalizador': document.getElementById('canalizador').value,
             'eletricista': document.getElementById('eletricista').value,

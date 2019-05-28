@@ -39,16 +39,14 @@
     <p class="titulo">Menu</p>
     <p class="item" onclick="mudarPagina('main');">Inicio</p>
     <p class="titulo">Obras</p>
-    <p class="item" onclick="mudarPagina('criar_servico');">Pedir Servico Direto</p>
-    <p class="item" onclick="mudarPagina('criar_obra');">Pedir Obra</p>
-    <p class="item" onclick="mudarPagina('listar_obras');">Ver todas as Obras</p>
+    <p class="item" onclick="mudarPagina('concorrer_servico_trabalho');">Concorrer para um serviço/obra</p>
     <p class="titulo">Conta</p>
     <p class="item" onclick="logout();">Terminar Sessão</p>
   </div>
   <!-- Corpo do programa -->
   <div class="container" id="container">
         
-        <p class="titulo">Lista das Obras</p>
+        <p class="titulo">Serviços Atuais</p>
         <table class="tabela">
           <tr>
             <th>ID da Obra</th>
@@ -57,7 +55,6 @@
           </tr>
           <%= lista_servicos %>
         </table>
-        <p class="subtitulo">Para ver os pedidos enviados pelos profissionais, clique em cima do ID da obra.</p>
   </div>
 
 

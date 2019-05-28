@@ -36,28 +36,33 @@
   </div>
   <!-- Menu Lateral -->
   <div class="menu" id="menu">
-    <p class="titulo">Menu</p>
-    <p class="item" onclick="mudarPagina('main');">Inicio</p>
-    <p class="titulo">Obras</p>
-    <p class="item" onclick="mudarPagina('criar_servico');">Pedir Servico Direto</p>
-    <p class="item" onclick="mudarPagina('criar_obra');">Pedir Obra</p>
-    <p class="item" onclick="mudarPagina('listar_obras');">Ver todas as Obras</p>
-    <p class="titulo">Conta</p>
-    <p class="item" onclick="logout();">Terminar Sessão</p>
-  </div>
+      <p class="titulo">Menu</p>
+      <p class="item" onclick="mudarPagina('main');">Inicio</p>
+      <p class="titulo">Obras</p>
+      <p class="item" onclick="mudarPagina('criar_servico');">Pedir Servico Direto</p>
+      <p class="item" onclick="mudarPagina('criar_obra');">Pedir Obra</p>
+      <p class="item" onclick="mudarPagina('listar_obras');">Ver todas as Obras</p>
+      <p class="titulo">Conta</p>
+      <p class="item" onclick="logout();">Terminar Sessão</p>
+    </div>
   <!-- Corpo do programa -->
   <div class="container" id="container">
         
-        <p class="titulo">Lista das Obras</p>
-        <table class="tabela">
-          <tr>
-            <th>ID da Obra</th>
-            <th>Data Limite</th>
-            <th>Descrição</th>
-          </tr>
-          <%= lista_servicos %>
-        </table>
-        <p class="subtitulo">Para ver os pedidos enviados pelos profissionais, clique em cima do ID da obra.</p>
+        <p class="titulo">Nova Obra</p>
+        <p class="subtitulo">Data Limite</p>
+        <input class="input_login" type="text" id="data_limite" placeholder="DD/MM/YYYY">
+        <p class="subtitulo">Descrição</p>
+        <textarea rows="4" cols="50" class="input_login" id="descricao" placeholder="Descricao"></textarea>
+        <br>
+        <br>
+        <p class="subtitulo">Profissionais a contratar</p>
+            <select class="input_login" id="profissional">
+                <option value="Carpintaria" selected="selected">Carpintaria</option>
+                <option value="Canalizador">Canalizador</option>
+                <option value="Eletricista">Eletricista</option>
+                <option value="Construção Civil">Construção Civil</option>
+            </select>
+        <p class="btn_submit" onclick="criar_obra();">Criar Nova Obra</p>
   </div>
 
 
@@ -106,22 +111,53 @@
     });    
   
     function criar_obra(){
+      var dados = { 
+            
+        };
+        var Carpintaria = 0;
+        var Canalizador = 0;
+        var Eletricista = 0;
+        var Construcao_Civil = 0;
+        switch(document.getElementById('profissional').value){
+            case "Carpintaria":
+            Carpintaria = 1;
+            dados = {...dados,"descricao_carpintaria": document.getElementById('descricao').value};
+            break;
+            case "Canalizador":
+            Canalizador = 1;
+            dados = {...dados,"descricao_canalizador": document.getElementById('descricao').value};
+            break;
+            case "Eletricista":
+            Eletricista = 1;
+            dados = {...dados,"descricao_eletricista": document.getElementById('descricao').value};
+            break;
+            case "Construção Civil":
+            Construcao_Civil = 1;
+            dados = {...dados,"descricao_construcao_civil": document.getElementById('descricao').value};
+            break;
+            default:
+            break;
+        }
+        dados = {...dados,
+          'data_limite': document.getElementById('data_limite').value,
+            'descricao': document.getElementById('descricao').value, 
+            'carpintaria': Carpintaria,
+            'canalizador': Canalizador,
+            'eletricista': Eletricista,
+            'construcao_civil': Construcao_Civil
+
+        };
       $.ajax({
+        /* Por Descricao dentro da do profissional tambem */
         type: 'POST',
         url: '/criar_obra',
-        data: { 
-            'descricao': document.getElementById('descricao').value, 
-            'carpintaria': document.getElementById('carpintaria').value,
-            'canalizador': document.getElementById('canalizador').value,
-            'eletricista': document.getElementById('eletricista').value,
-            'construcao_civil': document.getElementById('construcao_civil').value
-        },
+        data: dados,
         success: (response) => {
           if(response === "ok"){
-            alert('Proposta de edição enviada!');
+            alert('Obra criada com sucesso!');
             window.location.href = "/main.html";
           }else{
-            alert('Impossivel enviar a proposta!');
+            alert('Impossivel criar a obra!');
           }
         },
         error: (jqXHR, textStatus, errorThrown) => {
