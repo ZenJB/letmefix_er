@@ -12,8 +12,8 @@ const db = new sqlite3.Database('./db.db');
 var app = express();
 
 passport.use(new FacebookStrategy({
-    clientID: '366703644051602',
-    clientSecret: 'd013476709e2f172815d5fd3e7e49c7e',
+    clientID: '',
+    clientSecret: '',
     callbackURL: "https://letmefix.tk/auth/facebook/callback",
     profileFields: ['id', 'emails', 'name'] //This
   },
